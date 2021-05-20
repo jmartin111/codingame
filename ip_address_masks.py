@@ -24,13 +24,13 @@ def get_human_address(binary):
     return ip.rstrip(".")
 
 
-def get_human_bdcast(binary, mask):
+def get_human_bdcast(binary, mask_bits):
     bdcast = ""
-    if mask == "0" * 32:
+    if mask_bits == "0" * 32:
         return "255.255.255.255"
 
     for i in range(0, len(binary) - 14, 8):
-        p = int(binary[i:i + 8], 2) & int(mask[i:i + 8], 2)
+        p = int(binary[i:i + 8], 2) & int(mask_bits[i:i + 8], 2)
         bdcast += f"{p}."
     return f"{bdcast}255"
 
