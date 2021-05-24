@@ -62,22 +62,23 @@ def do_battle_with_(combatant):
     general_threat = True
     while general_threat:
         general_threat = get_threat_level(enemies)
-
+        if not general_threat:
+            break
         most_powerful_attack = 0
         most_powerful_ship = None
         for k, enemy in enemies.items():
             if enemy.is_threat:
                 combatant.hp -= enemy.damage
-                if enemy.damage > most_powerful_attackt:
+                if enemy.damage > most_powerful_attack:
                     most_powerful_ship = enemy
 
         # every enemy (that can) has attacked in
         # this round and the player can now attack
         # the most powerful ship
         combatant.deal_damage(most_powerful_ship)
-        if enemy.hp < 0:
+        if most_powerful_ship.hp < 0:
             # 'eliminate' the target
-            enemy.is_threat = False
+            most_powerful_ship.is_threat = False
 
 
 if __name__ == "__main__":
